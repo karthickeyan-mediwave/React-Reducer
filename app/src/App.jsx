@@ -35,6 +35,11 @@ export default function Todo() {
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         return updatedTodos;
       }
+      case "DRAG": {
+        const updatedTodos = action.value;
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        return updatedTodos;
+      }
       default: {
         throw Error("Unknown action: " + action.type);
       }
@@ -61,6 +66,13 @@ export default function Todo() {
       id: todoId,
     });
   }
+  function onDrag(copyListItems) {
+    console.log(copyListItems);
+    dispatch({
+      type: "DRAG",
+      value: copyListItems,
+    });
+  }
 
   return (
     <>
@@ -70,6 +82,7 @@ export default function Todo() {
         todos={todos}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onDrag={onDrag}
         draggable
       />
     </>

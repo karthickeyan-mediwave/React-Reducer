@@ -20,7 +20,6 @@ export default function EditTodo({ todo, onChange, onDelete }) {
     <label>
       <input
         type="checkbox"
-        className="draggable"
         checked={todo.done}
         onChange={(e) => {
           onChange({
