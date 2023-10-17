@@ -77,14 +77,31 @@ export default function Todo() {
 
   return (
     <>
-      <h1>Todo</h1>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList
-        todos={todos}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onDrag={onDrag}
-      />
+      {/* <AddEditableTodo initialText="Sample Text" /> */}
+
+      <div class="w3-row">
+        <h1>Task</h1>
+        <div class="w3-third w3-container color">
+          <h2>
+            <div className="todo">
+              <h2>Todo</h2>
+              <AddTodo onAddTodo={handleAddTodo} />
+              <TodoList
+                todos={todos}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onDrag={onDrag}
+              />
+            </div>
+          </h2>
+        </div>
+        <div class="w3-third w3-container progress">
+          <h2>progress</h2>
+        </div>
+        <div class="w3-third w3-container completed">
+          <h2>completed</h2>
+        </div>
+      </div>
     </>
   );
 }

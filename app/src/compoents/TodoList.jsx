@@ -32,7 +32,6 @@ export default function TodoList({ todos, onEdit, onDelete, onDrag }) {
     >
       {todos.map((todo, index) => (
         <div
-          className="individual-list"
           key={todo.id}
           draggable
           onDragStart={(e) => dragStart(e, index)}

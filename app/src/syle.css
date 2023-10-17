@@ -1,4 +1,4 @@
-:root {
+/* :root {
   text-align: center;
 }
 .error {
@@ -6,10 +6,54 @@
 }
 .todo-list {
   margin-top: 32px;
-  /* width: 250px; */
   padding: 55px;
   background: aliceblue;
 }
 .individual-list {
   margin: 10px;
+} */
+.error {
+  color: red;
 }
+.color {
+  background-color: #00a973;
+}
+.card {
+  background: white;
+  color: black;
+  font-size: 23px;
+  height: 100px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px white;
+}
+h1 {
+  text-align: center;
+  color: dodgerblue;
+}
+textarea {
+  border: none;
+  outline: none;
+}
+.w3-input {
+  padding: 0;
+}
+/* .submit-btn {
+  width: 50px;
+  margin: 5px auto;
+} */
+/* .submit-btn button {
+  color: white !important;
+  background-color: black !important;
+  text-align: center;
+  margin: 5px auto;
+  border: none;
+  border-radius: 10px;
+}
+.progress {
+  background-color: aliceblue;
+}
+.completed {
+  background-color: azure;
+} */
