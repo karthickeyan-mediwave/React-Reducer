@@ -1,57 +1,43 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
+import EditTodo from "./EditTodo";
 
 export default function TodoList({ todos, onEdit, onDelete }) {
+  const dragItem = useRef();
+  const dragOverItem = useRef();
+  const dragStart = (e, position) => {
+    dragItem.current = position;
+    console.log(e.target.innerHTML);
+  };
+
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position;
+    console.log(e.target.innerHTML);
+  };
+  const drop = (e) => {
+    const copyListItems = [...todos];
+    console.log([...todos]);
+    const dragItemContent = copyListItems[dragItem.current];
+    copyListItems.splice(dragItem.current, 1);
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    // setList(copyListItems);
+    console.log(copyListItems);
+  };
+
   return (
     <div>
       {todos.map((todo) => (
-        <div key={todo.id}>
-          <TodoEntries todos={todos} onChange={onEdit} onDelete={onDelete} />
+        <div
+          key={todo.id}
+          draggable
+          onDragStart={(e) => dragStart(e, todo.id)}
+          onDragEnter={(e) => dragEnter(e, todo.id)}
+          onDragEnd={drop}
+        >
+          <EditTodo todo={todo} onChange={onEdit} onDelete={onDelete} />
         </div>
       ))}
     </div>
-  );
-}
-
-function TodoEntries({ todos, onChange, onDelete }) {
-  const [isEditing, setIsEditing] = useState(false);
-  let taskContent;
-  if (isEditing) {
-    taskContent = (
-      <>
-        <input
-          value={todos.text}
-          onChange={(e) => {
-            onChange({
-              ...todos,
-              text: e.target.value,
-            });
-          }}
-        />
-        <button onClick={() => setIsEditing(false)}>Update</button>
-      </>
-    );
-  } else {
-    taskContent = (
-      <>
-        {todos.text}
-        <button onClick={() => setIsEditing(true)}>Edit</button>
-      </>
-    );
-  }
-  return (
-    <label>
-      <input
-        type="checkbox"
-        checked={todos.done}
-        onChange={(e) => {
-          onChange({
-            ...todos,
-            done: e.target.checked,
-          });
-        }}
-      />
-      {taskContent}
-      <button onClick={() => onDelete(todos.id)}>Delete</button>
-    </label>
   );
 }
