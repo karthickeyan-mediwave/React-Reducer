@@ -1,6 +1,7 @@
-import { useReducer, useEffect, useRef } from "react";
+import { useReducer } from "react";
 import AddTodo from "./compoents/AddTodo";
 import TodoList from "./compoents/TodoList";
+import "./syle.css";
 
 export default function Todo() {
   const initialTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -66,11 +67,11 @@ export default function Todo() {
       id: todoId,
     });
   }
-  function onDrag(copyListItems) {
-    console.log(copyListItems);
+  function onDrag(DragTodoList) {
+    console.log(DragTodoList);
     dispatch({
       type: "DRAG",
-      value: copyListItems,
+      value: DragTodoList,
     });
   }
 
@@ -83,7 +84,6 @@ export default function Todo() {
         onEdit={handleEdit}
         onDelete={handleDelete}
         onDrag={onDrag}
-        draggable
       />
     </>
   );

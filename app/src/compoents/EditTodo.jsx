@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "../compoents/syle.css";
 export default function EditTodo({ todo, onChange, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);

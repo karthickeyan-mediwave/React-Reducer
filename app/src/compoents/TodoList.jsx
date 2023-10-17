@@ -9,14 +9,14 @@ export default function TodoList({ todos, onEdit, onDelete, onDrag }) {
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
   };
-  const dragEnd = () => {
+  const dragEnd = (e, index) => {
     if (dragItem.current !== null && dragOverItem.current !== null) {
-      const copyListItems = [...todos];
-      const dragItemContent = copyListItems[dragItem.current];
-      copyListItems.splice(dragItem.current, 1);
-      copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-      onDrag(copyListItems);
-      console.log(copyListItems);
+      const DragTodoList = [...todos];
+      const dragItemContent = DragTodoList[dragItem.current];
+      DragTodoList.splice(dragItem.current, 1);
+      DragTodoList.splice(dragOverItem.current, 0, dragItemContent);
+      onDrag(DragTodoList);
+      console.log(DragTodoList, index);
       dragItem.current = null;
       dragOverItem.current = null;
     }
@@ -25,14 +25,19 @@ export default function TodoList({ todos, onEdit, onDelete, onDrag }) {
     e.preventDefault();
   };
   return (
-    <div onDrop={drop} onDragOver={(e) => e.preventDefault()}>
+    <div
+      onDrop={drop}
+      onDragOver={(e) => e.preventDefault()}
+      className="todo-list"
+    >
       {todos.map((todo, index) => (
         <div
+          className="individual-list"
           key={todo.id}
           draggable
           onDragStart={(e) => dragStart(e, index)}
           onDragEnter={(e) => dragEnter(e, index)}
-          onDragEnd={dragEnd}
+          onDragEnd={(e) => dragEnd(e, index)}
         >
           <EditTodo todo={todo} onChange={onEdit} onDelete={onDelete} />
         </div>

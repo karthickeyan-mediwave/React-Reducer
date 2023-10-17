@@ -1,0 +1,15 @@
+:root {
+  text-align: center;
+}
+.error {
+  color: red;
+}
+.todo-list {
+  margin-top: 32px;
+  /* width: 250px; */
+  padding: 55px;
+  background: aliceblue;
+}
+.individual-list {
+  margin: 10px;
+}
