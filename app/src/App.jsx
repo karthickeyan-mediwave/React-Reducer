@@ -1,7 +1,29 @@
-import { useReducer } from "react";
+import { useReducer, useState, useEffect } from "react";
 import AddTodo from "./compoents/AddTodo";
 import TodoList from "./compoents/TodoList";
+import Progess from "./compoents/Progess";
 import "./syle.css";
+import Completed from "./compoents/Completed";
+const tasks = [
+  {
+    id: 123,
+    text: "Add space validation for inputs",
+    dateTime: new Date(),
+    inState: "todo",
+  },
+  {
+    id: 456,
+    text: "review code in GH",
+    dateTime: new Date(),
+    inState: "in_progress",
+  },
+  {
+    id: 789,
+    text: "Clean up code",
+    dateTime: new Date(),
+    inState: "done",
+  },
+];
 
 export default function Todo() {
   const initialTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -15,6 +37,8 @@ export default function Todo() {
           text: action.text,
           done: false,
           draggable: true,
+          dateTime: new Date(),
+          inState: "todo",
         };
         const updatedTodos = [...todos, newTodo];
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
@@ -46,7 +70,9 @@ export default function Todo() {
       }
     }
   }
-
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  // }, []);
   function handleAddTodo(text) {
     dispatch({
       type: "ADD",
@@ -75,31 +101,54 @@ export default function Todo() {
     });
   }
 
+  // useEffect(() => {
+  //   const items = JSON.parse(localStorage.getItem("todos"));
+  //   if (items) {
+  //     setItems(items);
+  //   }
+  // }, []);
+  const drop = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
-      {/* <AddEditableTodo initialText="Sample Text" /> */}
-
-      <div class="w3-row">
-        <h1>Task</h1>
-        <div class="w3-third w3-container color">
-          <h2>
-            <div className="todo">
-              <h2>Todo</h2>
-              <AddTodo onAddTodo={handleAddTodo} />
-              <TodoList
-                todos={todos}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                onDrag={onDrag}
-              />
-            </div>
-          </h2>
-        </div>
-        <div class="w3-third w3-container progress">
-          <h2>progress</h2>
-        </div>
-        <div class="w3-third w3-container completed">
-          <h2>completed</h2>
+      <div className="container">
+        <h1>Trello</h1>
+        <div className="row ">
+          <div className="col-sm taskDiv">
+            <AddTodo onAddTodo={handleAddTodo} />
+            <TodoList
+              todos={todos}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onDrag={onDrag}
+            />
+          </div>
+          <div
+            className="col-sm taskDiv"
+            onDrop={drop}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <Progess
+              tasks={tasks}
+              todos={todos}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          </div>
+          <div
+            className="col-sm taskDiv"
+            onDrop={drop}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <Completed
+              tasks={tasks}
+              todos={todos}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          </div>
         </div>
       </div>
     </>

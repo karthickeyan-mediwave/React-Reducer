@@ -21,16 +21,15 @@
 .card {
   background: white;
   color: black;
-  font-size: 23px;
-  height: 100px;
-  text-align: center;
-  margin-top: 10px;
+  font-size: 18px;
+  /* height: 100px; */
+  /* text-align: center; */
   border-radius: 5px;
-  box-shadow: 2px 2px white;
+  padding: 10px;
+  border: none !important;
 }
 h1 {
   text-align: center;
-  color: dodgerblue;
 }
 textarea {
   border: none;
@@ -39,17 +38,64 @@ textarea {
 .w3-input {
   padding: 0;
 }
+body {
+  background-color: #2970a2;
+  color: #fff;
+}
+blockquote {
+  background-color: #fff;
+}
+.taskDiv {
+  margin: 8px;
+  padding: 10px 8px;
+  background-color: #e4e3e4;
+  color: #333;
+  border-radius: 8px;
+}
+.todo-head {
+  display: flex;
+  justify-content: space-between;
+}
+.submit-btn button {
+  border-color: #494444;
+  border-radius: 3px;
+}
+.clear-btn button {
+  border-radius: 5px;
+  border: none;
+  background: none;
+  height: 23px;
+}
+.clear-btn {
+  display: flex;
+  justify-content: end;
+}
+.edit-head {
+  border-radius: 5px;
+  background-color: gray;
+  margin-top: 10px;
+}
+.pro-head,
+.completed {
+  margin-top: 18px !important;
+  margin-bottom: 20px !important;
+}
+.date {
+  font-size: 12px;
+  /* float: right !important; */
+  display: flex;
+  justify-content: end;
+}
+.card p {
+  text-align: center;
+}
 /* .submit-btn {
   width: 50px;
   margin: 5px auto;
 } */
 /* .submit-btn button {
-  color: white !important;
-  background-color: black !important;
-  text-align: center;
-  margin: 5px auto;
-  border: none;
-  border-radius: 10px;
+ border-color: #494444;
+    border-radius: 3px;
 }
 .progress {
   background-color: aliceblue;

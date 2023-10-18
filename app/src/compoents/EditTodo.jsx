@@ -1,6 +1,10 @@
 import { useState } from "react";
 // import "../compoents/syle.css";
 export default function EditTodo({ todo, onChange }) {
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);
 
@@ -34,8 +38,8 @@ export default function EditTodo({ todo, onChange }) {
         </>
       ) : (
         <>
-          {" "}
-          <p> {todo.text} </p>{" "}
+          <p> {todo.text} </p>
+          <h6 className="date">{date}</h6>
         </>
       )}
     </div>
