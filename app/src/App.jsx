@@ -129,6 +129,7 @@ export default function Todo() {
             className="col-sm taskDiv"
             onDrop={drop}
             onDragOver={(e) => e.preventDefault()}
+            onDrag={onDrag}
           >
             <Progess
               tasks={tasks}

@@ -20,7 +20,7 @@ export default function TodoList({ todos, onEdit, onDelete, onDrag }) {
       console.log(dragItemContent.inState);
       console.log(dragItemContent.id);
       let dragItemContentinState = (dragItemContent.inState = "progress");
-      let dragItemContentinState1 = (dragItemContent.inState = "completed");
+      // let dragItemContentinState1 = (dragItemContent.inState = "completed");
       // DragTodoList.splice(dragItem.current, 1);
       // DragTodoList.splice(dragOverItem.current, 0, dragItemContent);
       onDrag(DragTodoList);
@@ -29,8 +29,8 @@ export default function TodoList({ todos, onEdit, onDelete, onDrag }) {
         DragTodoList,
         index,
         id,
-        dragItemContentinState,
-        dragItemContentinState1
+        dragItemContentinState
+        // dragItemContentinState1
       );
       dragItem.current = null;
       dragOverItem.current = null;
