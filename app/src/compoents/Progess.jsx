@@ -1,37 +1,27 @@
 import React, { useRef } from "react";
 import EditTodo from "./EditTodo";
-const Progess = ({ tasks, todos, onEdit, onDelete, todo, onDrag }) => {
+const Progess = ({ todos, onEdit, onDelete, onDrag }) => {
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
   const dragStart = (ev, position, index, id) => {
     dragItem.current = position;
-    ev.dataTransfer.setData("id", id);
-    console.log(id);
-
+    ev.dataTransfer.setData("id", index);
+    console.log(index);
     console.log(index);
   };
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
   };
   const dragEnd = (e, index, id) => {
-    if (dragItem.current !== null && dragOverItem.current !== null) {
-      const DragTodoList = [...todos];
-      const dragItemContent = DragTodoList[dragItem.current];
+    if (dragItem.current !== null) {
+      const DragTodoList1 = [...todos];
+      const dragItemContent = DragTodoList1[dragItem.current];
       console.log(dragItemContent.inState);
       console.log(dragItemContent.id);
-      let dragItemContentinState = (dragItemContent.inState = "completed");
       // let dragItemContentinState1 = (dragItemContent.inState = "completed");
-      // DragTodoList.splice(dragItem.current, 1);
-      // DragTodoList.splice(dragOverItem.current, 0, dragItemContent);
-      onDrag(DragTodoList);
-      // onDrag(dragItemContentinState);
-      console.log(
-        DragTodoList,
-        index,
-        id,
-        dragItemContentinState
-        // dragItemContentinState1
-      );
+      let Dragid = dragItemContent.id;
+      onDrag(Dragid);
+      console.log(index, id);
       dragItem.current = null;
       dragOverItem.current = null;
     }
@@ -42,7 +32,7 @@ const Progess = ({ tasks, todos, onEdit, onDelete, todo, onDrag }) => {
       <div className="todo-list">
         {todos
           .filter((k) => k.inState == "progress")
-          .map((todo, index) => (
+          .map((todo, index, id) => (
             <div key={todo.id} className="edit-head">
               <div
                 className="clear-btn"

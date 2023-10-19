@@ -1,35 +1,6 @@
-/* :root {
-  text-align: center;
-}
-.error {
-  color: red;
-}
-.todo-list {
-  margin-top: 32px;
-  padding: 55px;
-  background: aliceblue;
-}
-.individual-list {
-  margin: 10px;
-} */
-.error {
-  color: red;
-}
-.color {
-  background-color: #00a973;
-}
-.card {
-  background: white;
-  color: black;
-  font-size: 18px;
-  /* height: 100px; */
-  /* text-align: center; */
-  border-radius: 5px;
-  padding: 10px;
-  border: none !important;
-}
 h1 {
   text-align: center;
+  margin: 100px 0 25px 0;
 }
 textarea {
   border: none;
@@ -38,12 +9,23 @@ textarea {
 .w3-input {
   padding: 0;
 }
+.row {
+  padding: 10px;
+}
 body {
   background-color: #2970a2;
   color: #fff;
 }
 blockquote {
   background-color: #fff;
+}
+.card {
+  background: white;
+  color: black;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 10px;
+  border: none !important;
 }
 .taskDiv {
   margin: 8px;
@@ -55,6 +37,7 @@ blockquote {
 .todo-head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .submit-btn button {
   border-color: #494444;

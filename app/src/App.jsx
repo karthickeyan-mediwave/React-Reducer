@@ -4,31 +4,11 @@ import TodoList from "./compoents/TodoList";
 import Progess from "./compoents/Progess";
 import "./syle.css";
 import Completed from "./compoents/Completed";
-const tasks = [
-  {
-    id: 123,
-    text: "Add space validation for inputs",
-    dateTime: new Date(),
-    inState: "todo",
-  },
-  {
-    id: 456,
-    text: "review code in GH",
-    dateTime: new Date(),
-    inState: "in_progress",
-  },
-  {
-    id: 789,
-    text: "Clean up code",
-    dateTime: new Date(),
-    inState: "done",
-  },
-];
 
 export default function Todo() {
   const initialTodos = JSON.parse(localStorage.getItem("todos")) || [];
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
-
+  const [startid, setstartid] = useState();
   function todosReducer(todos, action) {
     switch (action.type) {
       case "ADD": {
@@ -37,7 +17,6 @@ export default function Todo() {
           text: action.text,
           done: false,
           draggable: true,
-          dateTime: new Date(),
           inState: "todo",
         };
         const updatedTodos = [...todos, newTodo];
@@ -60,11 +39,31 @@ export default function Todo() {
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         return updatedTodos;
       }
-      case "DRAG": {
-        const updatedTodos = action.value;
+      // case "DRAG-PROGRESS": {
+      //   const updatedTodos = action.value;
+      //   localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      //   return updatedTodos;
+      // }
+      case "PROGRESS": {
+        let updatedTodos = todos.filter((task) => {
+          if (task.id == action.value.id) {
+            task.inState = action.value.state;
+          }
+
+          return task;
+        });
+        console.log(updatedTodos);
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
         return updatedTodos;
       }
+
+      // case "DRAG-COMPLETE": {
+      //   const updatedTodos = action.values;
+      //   localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      //   console.log(updatedTodos);
+      //   return updatedTodos;
+      // }
       default: {
         throw Error("Unknown action: " + action.type);
       }
@@ -93,13 +92,26 @@ export default function Todo() {
       id: todoId,
     });
   }
-  function onDrag(DragTodoList) {
-    console.log(DragTodoList);
-    dispatch({
-      type: "DRAG",
-      value: DragTodoList,
-    });
+  // function onDrag(DragTodoList) {
+  //   console.log(DragTodoList);
+  //   dispatch({
+  //     type: "DRAG-PROGRESS",
+  //     value: DragTodoList,
+  //   });
+  // }
+
+  function onDrag(Dragid) {
+    console.log(Dragid);
+    setstartid(Dragid);
   }
+
+  // function onDrag1(DragTodoList1) {
+  //   console.log(DragTodoList1);
+  //   dispatch({
+  //     type: "DRAG-COMPLETE",
+  //     values: DragTodoList1,
+  //   });
+  // }
 
   // useEffect(() => {
   //   const items = JSON.parse(localStorage.getItem("todos"));
@@ -107,16 +119,27 @@ export default function Todo() {
   //     setItems(items);
   //   }
   // }, []);
-  const drop = (e) => {
+  const drop = (e, state) => {
     e.preventDefault();
+    handledrop(state, startid);
   };
+  function handledrop(state, id) {
+    dispatch({
+      type: "PROGRESS",
+      value: { state, id },
+    });
+  }
 
   return (
     <>
       <div className="container">
         <h1>Trello</h1>
         <div className="row ">
-          <div className="col-sm taskDiv">
+          <div
+            className="col-sm taskDiv"
+            onDrop={(e) => drop(e, "todo")}
+            onDragOver={(e) => e.preventDefault()}
+          >
             <AddTodo onAddTodo={handleAddTodo} />
             <TodoList
               todos={todos}
@@ -127,27 +150,26 @@ export default function Todo() {
           </div>
           <div
             className="col-sm taskDiv"
-            onDrop={drop}
+            onDrop={(e) => drop(e, "progress")}
             onDragOver={(e) => e.preventDefault()}
-            onDrag={onDrag}
           >
             <Progess
-              tasks={tasks}
               todos={todos}
               onDelete={handleDelete}
               onEdit={handleEdit}
+              onDrag={onDrag}
             />
           </div>
           <div
             className="col-sm taskDiv"
-            onDrop={drop}
+            onDrop={(e) => drop(e, "completed")}
             onDragOver={(e) => e.preventDefault()}
           >
             <Completed
-              tasks={tasks}
               todos={todos}
               onDelete={handleDelete}
               onEdit={handleEdit}
+              onDrag={onDrag}
             />
           </div>
         </div>

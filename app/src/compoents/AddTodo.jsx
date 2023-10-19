@@ -8,8 +8,8 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <form onSubmit={handleSubmit} class="w3-container">
       <div className="todo-head">
-        <div>
-          <h2>TODO</h2>
+        <div className="pro-head">
+          <h2>TASK</h2>
         </div>
         <div className="submit-btn">
           <button type="submit">+</button>

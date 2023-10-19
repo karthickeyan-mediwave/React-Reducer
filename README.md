@@ -1,4 +1,4 @@
-### Using reducer to make a todo app
+### Using reducer to make a trello app clone
 
 #### for reference
 
@@ -7,3 +7,13 @@
 #### for drag reference
 
 -https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
+
+##### To run
+
+###### cd app
+
+```sh
+
+$ npm run dev
+
+```
